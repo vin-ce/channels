@@ -4,6 +4,10 @@
  * See: https://www.gatsbyjs.com/docs/gatsby-config/
  */
 
+
+require("dotenv").config()
+
+
 module.exports = {
   /* Your site config here */
   plugins: [
@@ -20,7 +24,19 @@ module.exports = {
     },
     "gatsby-plugin-image",
     "gatsby-plugin-sharp",
-    `gatsby-plugin-react-helmet`,
+    {
+      resolve: 'gatsby-plugin-manifest',
+      options: {
+        name: 'channels',
+        icon: 'src/images/this-is-fine.jpg'
+      }
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        path: `${__dirname}/src/images`,
+      },
+    },
 
   ],
 }

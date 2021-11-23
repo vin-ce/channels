@@ -1,0 +1,32 @@
+@import "./variables.styl"
+
+.module
+  display flex
+  margin-top 2.4rem
+  margin-left 2.4rem
+
+  .index
+    width $index-width
+    font-size $font-size_200
+    font-family IBM Plex Sans
+
+    padding-top $index-padding-top-adjustment
+
+    color $grey-200
+
+  .content
+
+    p
+      width $content-width
+
+      &:first-of-type
+        margin-top 0
+      
+      &:last-of-type
+        margin-bottom 0
+
+    img
+      max-width $broad-width
+      border 3px solid $red
+
+

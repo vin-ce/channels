@@ -1,17 +1,19 @@
 
 
-export const articleData = {
-  "1": {
+export const articleData = [
+  {
+    headingIndex: "1",
     heading: "Introduction",
-    "1": {
+    sectionCount: 2,
+    1: {
       content: [
         { text: "There is a peculiar attitude, here at the beginning of the 21st century. On the one hand, we agree things aren’t fine. On the other hand, there’s a widespread feeling that there’s nothing to be done." },
-        { text: "The first thing to recognize is that this isn’t always how the present feels: often in the past, people had a sense that there was something—something huge — to be done. Essays like the Communist Manifesto give people this sense. Before that, at the dawn of modern democracy, documents like Common Sense (in the US) and the Declaration of the Rights of Man and of the Citizen (in France) gave people the same sense. There was something to be done." },
+        { text: "The first thing to recognize is that this isn’t always how the present feels: often in the past, people had a sense that there was something — something huge — to be done. Essays like the Communist Manifesto give people this sense. Before that, at the dawn of modern democracy, documents like Common Sense (in the US) and the Declaration of the Rights of Man and of the Citizen (in France) gave people the same sense. There was something to be done." },
         { text: "I’d like to address, here, why things feel different now." },
       ],
       // grab comments from database? 
     },
-    "2": {
+    2: {
       content: [
         { text: "Despite what activists say, I believe this feeling is somewhat justified. I believe it shows where our society is stuck. It’s not stuck for a simple reason — not just because of apathy, consumer comfort, the rise of clicktivism, or anything like that." }
       ],
@@ -26,14 +28,16 @@ export const articleData = {
 
     },
   },
-  "2": {
+  {
+    headingIndex: "2",
     heading: "What's The Problem?",
-    "1": {
+    sectionCount: 3,
+    1: {
       content: [
         { text: "Despite what activists say, I believe this feeling is somewhat justified. I believe it shows where our society is stuck. It’s not stuck for a simple reason — not just because of apathy, consumer comfort, the rise of clicktivism, or anything like that." }
       ],
     },
-    "2": {
+    2: {
       content: [
         {
           image: "2-2.png",
@@ -43,7 +47,8 @@ export const articleData = {
 
       ]
     },
-    "5": {
+    // this should be '5'
+    3: {
       content: [
         { text: "So what blocks the creation of new institutions? It’s not the greed of the powerful; it’s not some physics of balancing incentives:" },
         { emphasis: "We’re waiting on a new vision of human nature." },
@@ -60,5 +65,5 @@ export const articleData = {
       }
     }
   },
-}
+]
 
