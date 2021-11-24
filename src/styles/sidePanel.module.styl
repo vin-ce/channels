@@ -1,0 +1,36 @@
+@import "./variables.styl"
+
+.panelContainer
+  // border-left 1px solid $black
+  display flex
+  // padding 2.4rem
+  position fixed
+  right 0 
+  top 0 
+  bottom 0
+
+  background-color $background-color
+
+.handle
+  margin 0
+  border-left 5px solid $black
+  cursor: w-resize;
+  position absolute
+  top 0 
+  bottom 0  
+
+// .content
+//   padding 2.4rem
+
+// .container::before {
+//     content: '';
+//     background-color: #ccc;
+//     // position: absolute;
+//     left: 0;
+//     width: 4px;
+//     height: 100%;
+//     cursor: ew-resize;
+// }
+
+.contentContainer
+  padding 2.4rem

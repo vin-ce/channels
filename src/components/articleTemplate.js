@@ -1,5 +1,5 @@
 import React from "react"
-import { articleData } from "../data/articleData"
+import { articleData } from "../data/data"
 import classes from "../styles/articleTemplate.module.styl"
 import { StaticImage } from 'gatsby-plugin-image'
 
@@ -7,6 +7,7 @@ export default function ArticleTemplate ({ headingIndex, sectionIndex, imageSour
 
   let indexEl
   let bodyEl
+  let id
 
   if (sectionIndex) {
 
@@ -85,6 +86,8 @@ export default function ArticleTemplate ({ headingIndex, sectionIndex, imageSour
       </div>
     )
 
+    id = `${headingIndex}-${sectionIndex}`
+
   } else {
     // only has heading
     indexEl = (
@@ -97,11 +100,13 @@ export default function ArticleTemplate ({ headingIndex, sectionIndex, imageSour
       </div>
     )
 
+    id = headingIndex
+
   }
 
 
   return (
-    <div className={ classes.module }>
+    <div id={ id } className={ classes.module }>
       { indexEl }
       { bodyEl }
     </div>
