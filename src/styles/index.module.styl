@@ -18,8 +18,46 @@
   bottom 0
   width 100%
 
+.nav 
+  $nav()
+  z-index 5
+  display flex
+  justify-content space-between
+  left 0
+  top 0
+  width 100% // adjust for scrollbar
+  box-sizing border-box
+  user-select none
 
+  opacity 1
+  transition opacity 200ms
 
+  a
+    height 24px
+
+  span
+    height min-content
+    cursor pointer
+
+  .compress
+    margin-left auto
+    margin-right 1.2rem
+
+  .sideOpen
+    margin-left 4.8rem
+
+  .unselected
+    color $grey-200
+
+  .selected
+    cursor default
+    pointer-events none
+
+.hidden
+  opacity 0
+  pointer-events none
+
+  //   font-size 18px
 // .article
 //   margin-right 2.4rem
 // this margin is indirectly controlled by landing image

@@ -9,28 +9,55 @@
   top 0 
   bottom 0
 
+  z-index 10
+
   background-color $background-color
 
-.handle
-  margin 0
-  border-left 5px solid $black
-  cursor: w-resize;
-  position absolute
-  top 0 
-  bottom 0  
+  width $content-width
 
-// .content
-//   padding 2.4rem
+  hr
+    border-bottom 1px solid $grey-200
+    width 100%
 
-// .container::before {
-//     content: '';
-//     background-color: #ccc;
-//     // position: absolute;
-//     left: 0;
-//     width: 4px;
-//     height: 100%;
-//     cursor: ew-resize;
-// }
+  .handle
+    margin 0
+    border-left 5px solid $black
+    cursor: w-resize;
+    position absolute
+    top 0 
+    bottom 0  
+    z-index 100
+
+    width auto
+
+
+.introContainer
+  margin-top 4.8rem
 
 .contentContainer
-  padding 2.4rem
+  margin 2.4rem
+  margin-top 4.8rem
+
+.nav
+  $nav()
+
+  text-transform uppercase
+  font-family $sans
+
+  display flex
+  justify-content space-between
+
+  box-sizing border-box
+  right 0
+
+  span
+    height 2.4rem
+
+  .navButton
+    cursor pointer
+
+  // .navButtons
+
+
+.mutedColor
+  color $grey-400

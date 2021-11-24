@@ -11,29 +11,20 @@ import { StaticImage } from 'gatsby-plugin-image'
 
 
 export const introData = {
-  landing: (
-    <div>
-      <div>
-        <h2>Metadata</h2>
-        <p>January 10, 2017 <span className={ classes.deemphasize }>— Last Updated</span></p>
-        <p>~16 minutes <span className={ classes.deemphasize }>— Time to Read</span></p>
-      </div>
-      <div>
-        <h2>Colophon</h2>
-        <p>
-          Type set in:
-          <ul>
-            <li><span style={ { fontStyle: 'italic' } }>Spectral</span>, designed by Production Type.</li>
-            <li><span style={ { fontFamily: 'IBM Plex Sans', fontStyle: 'italic' } }>IBM Plex Sans</span>, designed by Mike Abbink, in collaboration with Bold Monday.</li>
-            <li></li>
-          </ul>
-        </p>
-        <p>Summaries, links and website by <a href="http://www.vincentli.space/" target="_blank">Vincent Li</a></p>
-      </div>
+  metadata: (
+    <div className={ classes.landingContainer }>
+      <h2>Metadata</h2>
+      <p style={ { marginBottom: '0' } }>January 10, 2017 <span className={ classes.mutedColor }>— Last Updated</span></p>
+      <p style={ { marginTop: '0' } }>~16 minutes <span className={ classes.mutedColor }>— Time to Read</span></p>
     </div>
-  ),
+  )
+  ,
   how: (
-    <div>how???</div>
+
+    <div className={ classes.landingContainer }>
+      <h2>How??</h2>
+    </div>
+
   )
 }
 

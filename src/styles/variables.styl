@@ -16,11 +16,24 @@ $black = #1c1c1b
 $red = #BF2128
 $background-color = #faf8ed
 
+$sans = IBM Plex Sans
+$serif = Spectral
+
+
+
 $index()
   width $index-width
   font-size $font-size_200
-  font-family IBM Plex Sans
+  font-family $sans
 
   padding-top $index-padding-top-adjustment
 
   color $grey-200
+
+$nav()
+  padding 0.6rem 2.4rem
+  position fixed
+  width 100%
+  font-size $font-size_200
+  background-color $background-color
+  border-bottom 1px solid $black

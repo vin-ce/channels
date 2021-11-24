@@ -2,19 +2,23 @@ import React, { useState, useEffect, useRef } from "react"
 
 import "../styles/styles.styl"
 import classes from "../styles/index.module.styl"
+
 import Intro from '../components/intro'
 import ArticleTemplate from '../components/articleTemplate'
 import PositionTracker from '../components/positionTracker'
+import SidePanel from '../components/sidePanel'
+
 import { articleData } from "../data/data"
 import { graphql } from 'gatsby'
-import SidePanel from '../components/sidePanel'
+import { Link } from 'react-scroll'
 
 export default function Home ({ data }) {
 
   const [ isInit, setIsInit ] = useState(true)
   const [ headingPosition, setHeadingPosition ] = useState('landing')
 
-  const [ isSidePanel, setIsSidePanel ] = useState(true)
+  const [ isSidePanel, setIsSidePanel ] = useState(false)
+  const [ navEl, setNavEl ] = useState(null)
 
   // useRef so values don't reset on state change
   // fetch public image sources
@@ -73,28 +77,121 @@ export default function Home ({ data }) {
   const containerRef = useRef(null)
   const articleRef = useRef(null)
 
+  let navRef = useRef(null)
+
+  function setSizings (rightMargin, e, panelRef, panelNavRef) {
+    let offsetRight
+
+    if (e) {
+      offsetRight = containerRef.current.clientWidth - (e.clientX - containerRef.current.offsetLeft);
+    } else {
+      offsetRight = rightMargin
+    }
+
+    articleRef.current.style.width = 'unset'
+    articleRef.current.style.right = offsetRight + "px";
+
+    if (panelRef) {
+      panelRef.current.style.width = offsetRight + "px";
+      panelNavRef.current.style.width = offsetRight + "px";
+
+    }
+
+    if (navRef.current) {
+      navRef.current.style.width = 'unset'
+      navRef.current.style.right = offsetRight + "px";
+    }
+  }
+
+  let navClasses = [ classes.nav ]
+  if (headingPosition === 'landing') {
+    navClasses.push(classes.hidden)
+  }
+
   return (
-    <div ref={ containerRef } className={ classes.container }>
-      <div ref={ articleRef } className={ classes.article }>
-        <title>Nothing to Be Done</title>
+    <>
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></link>
 
-        <PositionTracker indexArr={ indexArr.current } setHeadingPosition={ setHeadingPosition } />
+      <div ref={ containerRef } className={ classes.container }>
 
-        <Intro />
+        <div ref={ navRef } className={ navClasses.join(' ') }>
 
-        { isInit ? null : articleEl.current }
+          <Link
+            to={ 'landing' }
+            smooth
+          >
+            <span className="material-icons">
+              arrow_upward
+            </span>
+          </Link >
+
+
+          <span className={ `material-icons ${classes.compress} ${classes.unselected}` }>
+            compress
+          </span>
+
+          <span className={ `material-icons ${classes.selected}` }>
+            expand
+          </span>
+
+          {
+            isSidePanel
+              ?
+              <span
+                className={ `material-icons ${classes.sideOpen}` }
+                onClick={ () => {
+                  setIsSidePanel(false)
+                  setSizings(0)
+                } }
+              >
+                arrow_forward_ios
+              </span>
+              :
+              <span
+                className={ `material-icons ${classes.sideOpen}` }
+                onClick={ () => {
+                  setIsSidePanel(true)
+                  setSizings(480)
+                } }
+              >
+                arrow_back_ios
+              </span>
+
+
+          }
+
+
+        </div>
+
+
+        <div ref={ articleRef } className={ classes.article }>
+          <title>Nothing to Be Done</title>
+
+          <PositionTracker indexArr={ indexArr.current } setHeadingPosition={ setHeadingPosition } />
+
+          <Intro />
+
+          { isInit ? null : articleEl.current }
+        </div>
+
+        { isSidePanel
+          ?
+          <SidePanel
+            headingPosition={ headingPosition }
+            isSidePanel={ isSidePanel }
+            setIsSidePanel={ setIsSidePanel }
+            containerRef={ containerRef }
+            articleRef={ articleRef }
+            navRef={ navRef }
+            setSizings={ setSizings }
+          /> :
+          null
+        }
+
+
       </div>
-      <SidePanel
-        headingPosition={ headingPosition }
-        isSidePanel={ isSidePanel }
-        setIsSidePanel={ setIsSidePanel }
-        headingPosition={ headingPosition }
-        containerRef={ containerRef }
-        articleRef={ articleRef }
-      />
+    </>
 
-
-    </div>
   )
 }
 

@@ -68,3 +68,16 @@ export const articleData = [
   },
 ]
 
+// export const colophonData = (
+  // <div>
+  //   <h2>Colophon</h2>
+  //   <div style={ { marginTop: '2.4rem' } }>
+  //     Type set in:
+  //     <ul>
+  //       <li><span style={ { fontStyle: 'italic' } }>Spectral</span>, designed by Production Type.</li>
+  //       <li><span style={ { fontFamily: 'IBM Plex Sans', fontStyle: 'italic' } }>IBM Plex Sans</span>, designed by Mike Abbink, in collaboration with Bold Monday.</li>
+  //     </ul>
+  //   </div>
+  //   <p>Summaries, links and website by <a href="http://www.vincentli.space/" target="_blank">Vincent Li</a></p>
+  // </div>
+// )
