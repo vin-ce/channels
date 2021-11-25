@@ -33,13 +33,16 @@ export default function Links ({ sectionData, imageSources, panelNavRef }) {
   let headingIndex = indicies[ 0 ]
   let sectionIndex = indicies[ 1 ]
 
-  const { bodyEl } = createArticleEl(headingIndex, sectionIndex, imageSources)
+  // smaller than 3 because rest of essay has not being added yet
+  if (headingIndex < 3) {
+    const { bodyEl } = createArticleEl(headingIndex, sectionIndex, imageSources)
 
-  linkedSectionText = (
-    <div className={ classes.linkedTextContainer }>
-      { bodyEl }
-    </div>
-  )
+    linkedSectionText = (
+      <div className={ classes.linkedTextContainer }>
+        { bodyEl }
+      </div>
+    )
+  }
 
 
   return (
@@ -63,6 +66,20 @@ export default function Links ({ sectionData, imageSources, panelNavRef }) {
       <div className={ `${classes.module} ${classes.bottomModule}` }>
         <div className={ classes.bottomTextBar }>
           <span className={ classes.label }> { linksArr[ curLinkedIndex ].index } | Text</span>
+          <span className={ classes.button } onClick={ () => {
+
+            // TEMPORARY -- rest of essay has not being added yet
+
+            if (headingIndex > 2) return
+            document.getElementById(linksArr[ curLinkedIndex ].index).scrollIntoView({
+              behavior: 'smooth'
+            });
+          } }>
+            <span className="material-icons-sharp">
+              login
+            </span>
+            Scroll to Text
+          </span>
         </div>
         { linkedSectionText }
       </div>

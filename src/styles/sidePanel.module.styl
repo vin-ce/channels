@@ -39,15 +39,34 @@
 
 .introContainer
 .infoContainer
-  margin-top 4.8rem
   max-width $content-width
+
+.textarea
+  width 100%
+  background-color $background-color
+  // height 12rem
+  font-size $font-size_200
+  font-family $sans
+  resize none
+  border-radius 0
+  box-sizing border-box
+  border 1px solid $grey-200
+
+  &:focus
+    outline none
+    border 1px solid $black
+    box-shadow 0
+    caret-color $red
+
+.button
+  $button()
+  float right
 
 
 
 .nav
   $nav()
-
-  position unset
+  padding 0.6rem 1.2rem
 
   width $content-width
 
@@ -68,12 +87,13 @@
     span
       margin-left 1.2rem
 
-    .navButton
+    .deselected
       cursor pointer
       color $grey-200
 
     .selected
       cursor default
+      pointer-events none
       color $black
 
   // .navButtons

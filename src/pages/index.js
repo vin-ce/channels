@@ -14,17 +14,18 @@ import { Link } from 'react-scroll'
 
 export default function Home ({ data }) {
 
-  const [ isInit, setIsInit ] = useState(true)
   const [ headingPosition, setHeadingPosition ] = useState('landing')
 
   const [ isSidePanel, setIsSidePanel ] = useState(false)
-  const [ navEl, setNavEl ] = useState(null)
+  const [ isSummary, setIsSummary ] = useState(false)
+
+  const [ articleEl, setArticleEl ] = useState(null)
 
   // useRef so values don't reset on state change
   // fetch public image sources
   const imageSources = useRef([])
 
-  const articleEl = useRef([])
+  // tracks all indicies of all the sections
   const indexArr = useRef([])
 
   useEffect(() => {
@@ -32,9 +33,11 @@ export default function Home ({ data }) {
       imageSources.current.push(node.node.publicURL)
     })
 
+    let tempArticleEl = []
+
     articleData.forEach((headingData, headingIndex) => {
 
-      articleEl.current.push(
+      tempArticleEl.push(
         <hr
           key={ `${headingIndex}-break` }
           className={ classes.headingBreak }
@@ -49,7 +52,7 @@ export default function Home ({ data }) {
       indexArr.current.push(`${headingIndex + 1}`)
 
       for (let sectionIndex = 0; sectionIndex < headingData.sectionCount; sectionIndex++) {
-        articleEl.current.push(
+        tempArticleEl.push(
           <hr
             key={ `${headingIndex}-${sectionIndex}-break` }
             className={ classes.sectionBreak }
@@ -59,6 +62,8 @@ export default function Home ({ data }) {
             headingIndex={ headingIndex + 1 }
             sectionIndex={ sectionIndex + 1 }
             imageSources={ imageSources.current }
+            isSummary={ isSummary }
+            setIsSummary={ setIsSummary }
           />
         )
 
@@ -67,10 +72,11 @@ export default function Home ({ data }) {
 
     })
 
-    setIsInit(false)
+    setArticleEl(tempArticleEl)
 
-  }, [])
+  }, [ isSummary ])
 
+  // refs used for panel resizing 
   const containerRef = useRef(null)
   const articleRef = useRef(null)
 
@@ -122,12 +128,17 @@ export default function Home ({ data }) {
             </span>
           </Link >
 
-
-          <span className={ `material-icons-sharp ${classes.compress} ${classes.unselected}` }>
+          <span
+            className={ `material-icons-sharp ${classes.compress} ${isSummary ? classes.selected : classes.unselected}` }
+            onClick={ () => setIsSummary(true) }
+          >
             compress
           </span>
 
-          <span className={ `material-icons-sharp ${classes.selected}` }>
+          <span
+            className={ `material-icons-sharp ${!isSummary ? classes.selected : classes.unselected}` }
+            onClick={ () => setIsSummary(false) }
+          >
             expand
           </span>
 
@@ -154,9 +165,7 @@ export default function Home ({ data }) {
                 arrow_back_ios
               </span>
 
-
           }
-
 
         </div>
 
@@ -168,7 +177,7 @@ export default function Home ({ data }) {
 
           <Intro />
 
-          { isInit ? null : articleEl.current }
+          { articleEl ? articleEl : null }
         </div>
 
         { isSidePanel

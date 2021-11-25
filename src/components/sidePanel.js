@@ -4,9 +4,6 @@ import { introData } from './intro'
 import { articleData } from "../data/data"
 import Links from './sidePanel/links'
 
-import { Link } from 'react-scroll'
-import Comments from './sidePanel/comments'
-
 export default function SidePanel ({ headingPosition, isSidePanel, setSizings, imageSources }) {
 
 
@@ -27,7 +24,8 @@ export default function SidePanel ({ headingPosition, isSidePanel, setSizings, i
   const panelRef = useRef(null)
   const panelNavRef = useRef(null)
 
-
+  const availableInfoSelections = useRef([])
+  const sectionData = useRef(null)
 
   document.onmousemove = (e) => {
     if (!isResizing) return
@@ -46,10 +44,12 @@ export default function SidePanel ({ headingPosition, isSidePanel, setSizings, i
   }
 
 
+  console.log("selected info", selectedInfo, infoEl)
+
   // ---------------
   // SETTING CONTENT
 
-  function selectInfo (info, availableInfoSelections, sectionData) {
+  function selectInfo (info) {
 
     // push buttons
     // change info
@@ -58,7 +58,7 @@ export default function SidePanel ({ headingPosition, isSidePanel, setSizings, i
       case 'footnotes': {
 
         let footnotesEl = []
-        sectionData.footnotes.forEach(footnote => {
+        sectionData.current.footnotes.forEach(footnote => {
           let key = Object.keys(footnote)
           footnotesEl.push(
             <p key={ `footnote-${key[ 0 ]}` }>
@@ -79,7 +79,7 @@ export default function SidePanel ({ headingPosition, isSidePanel, setSizings, i
 
         setInfoEl(
           <Links
-            sectionData={ sectionData }
+            sectionData={ sectionData.current }
             imageSources={ imageSources }
             panelNavRef={ panelNavRef }
           />
@@ -88,12 +88,35 @@ export default function SidePanel ({ headingPosition, isSidePanel, setSizings, i
         break
       }
       case 'special': {
+        setInfoEl(
+          <div className={ classes.infoContainer }>
+            special
+          </div>
+        )
         break
       }
       case 'comments': {
         setInfoEl(
           <div className={ classes.infoContainer }>
-            comments :)
+            <textarea
+              className={ classes.textarea }
+              placeholder="Comments."
+              rows='2'
+            />
+            <span className={ classes.button }>
+              <span className="material-icons-sharp">
+                send
+              </span>
+              Post
+            </span>
+          </div>
+        )
+        break
+      }
+      case 'summary': {
+        setInfoEl(
+          <div className={ classes.infoContainer }>
+            <p>{ sectionData.current.summary }</p>
           </div>
         )
         break
@@ -107,7 +130,7 @@ export default function SidePanel ({ headingPosition, isSidePanel, setSizings, i
 
     // sets buttons
     let tempNavButtons = []
-    availableInfoSelections.forEach(button => {
+    availableInfoSelections.current.forEach(button => {
 
       let iconID
       switch (button) {
@@ -127,25 +150,34 @@ export default function SidePanel ({ headingPosition, isSidePanel, setSizings, i
           iconID = 'chat_bubble'
           break
         }
+        case 'summary': {
+          iconID = 'compress'
+          break
+        }
         default: {
           console.log("something went wrong in selecting button: ", button)
         }
       }
 
-      if (button === info) {
-        tempNavButtons.push(
-          <span key={ `button-${iconID}` } className={ `material-icons-sharp ${classes.selected}` }>
-            { iconID }
-          </span>
-        )
+      const navButtonClasses = [ 'material-icons-sharp' ]
 
+      if (button === info) {
+        navButtonClasses.push(classes.selected)
       } else {
-        tempNavButtons.push(
-          <span key={ `button-${iconID}` } className={ `material-icons-sharp ${classes.navButton}` }>
-            { iconID }
-          </span>
-        )
+        navButtonClasses.push(classes.deselected)
       }
+
+      tempNavButtons.push(
+        <span
+          key={ `button-${iconID}` }
+          className={ navButtonClasses.join(' ') }
+          onClick={ () => {
+            setSelectedInfo(button)
+          } }
+        >
+          { iconID }
+        </span>
+      )
 
     })
 
@@ -155,7 +187,7 @@ export default function SidePanel ({ headingPosition, isSidePanel, setSizings, i
 
   }
 
-  // sets content and buttons
+  // sets up info and buttons
   useEffect(() => {
     // console.log('heading pos change', headingPosition)
 
@@ -180,32 +212,31 @@ export default function SidePanel ({ headingPosition, isSidePanel, setSizings, i
       let headingIndex = indicies[ 0 ]
       let sectionIndex = indicies[ 1 ]
 
-      let sectionData = articleData[ headingIndex - 1 ][ sectionIndex ]
+      sectionData.current = articleData[ headingIndex - 1 ][ sectionIndex ]
 
-      // console.log('section data', headingPosition, sectionData)
+      availableInfoSelections.current = []
 
-      let availableInfoSelections = []
+      if (sectionData.current) {
 
-      if (sectionData) {
-
-        if (sectionData.footnotes) {
-          availableInfoSelections.push('footnotes')
+        if (sectionData.current.footnotes) {
+          availableInfoSelections.current.push('footnotes')
         }
 
-        if (sectionData.links) {
-          availableInfoSelections.push('links')
+        if (sectionData.current.links) {
+          availableInfoSelections.current.push('links')
         }
 
-        if (sectionData.special) {
-          availableInfoSelections.push('special')
+        if (sectionData.current.special) {
+          availableInfoSelections.current.push('special')
         }
 
-        availableInfoSelections.push('comments')
+        availableInfoSelections.current.push('comments')
+        availableInfoSelections.current.push('summary')
 
-        if (availableInfoSelections.includes(selectedInfo)) {
-          selectInfo(selectedInfo, availableInfoSelections, sectionData)
+        if (availableInfoSelections.current.includes(selectedInfo)) {
+          selectInfo(selectedInfo)
         } else {
-          selectInfo(availableInfoSelections[ 0 ], availableInfoSelections, sectionData)
+          selectInfo(availableInfoSelections.current[ 0 ])
         }
       }
 
@@ -214,7 +245,14 @@ export default function SidePanel ({ headingPosition, isSidePanel, setSizings, i
   }, [ headingPosition ])
 
 
+  // happens when you click a nav button
+  useEffect(() => {
 
+    if (selectedInfo) {
+      console.log('selected info', selectedInfo)
+      selectInfo(selectedInfo)
+    }
+  }, [ selectedInfo ])
 
 
 

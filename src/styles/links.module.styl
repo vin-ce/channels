@@ -39,23 +39,18 @@
 .linkedTextContainer
   margin 2.4rem
 
+  // p
+  //   font-size $font-size_200
+  //   margin 1.2rem 0
+  //   max-width 36rem
+  
+  // blockquote  
+  //   font-size $font-size_400
+  //   max-width $container-width
+
 .bottomTextBar
   display flex
   justify-content space-between
 
   .button
-    color $grey-400
-    border 1px solid $grey-400
-    font-size $font-size_200
-    font-family $sans
-    display flex
-    align-items center
-    padding 0.3rem 0.6rem
-    cursor pointer
-    user-select none
-
-    span
-      font-size $font-size_200
-
-      &:first-of-type
-        margin-right 0.6rem
+    $button()

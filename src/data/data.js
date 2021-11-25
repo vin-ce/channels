@@ -12,17 +12,18 @@ export const articleData = [
         { text: "The first thing to recognize is that this isn’t always how the present feels: often in the past, people had a sense that there was something — something huge — to be done. Essays like the Communist Manifesto give people this sense. Before that, at the dawn of modern democracy, documents like Common Sense (in the US) and the Declaration of the Rights of Man and of the Citizen (in France) gave people the same sense. There was something to be done." },
         { text: "I’d like to address, here, why things feel different now." },
       ],
+      summary: "Things aren’t fine, and yet we feel that there’s nothing to be done.",
       // grab comments from database? 
     },
     "2": {
       content: [
         { text: "Despite what activists say, I believe this feeling is somewhat justified. I believe it shows where our society is stuck. It’s not stuck for a simple reason — not just because of apathy, consumer comfort, the rise of clicktivism, or anything like that." }
       ],
+      summary: "We’re stuck not because of any simple reason.",
       links: [
         {
           index: "2-6",
           relevance: "It’s not because of “greed of the powerful” or “balancing incentives” either, and it won’t be solved through old models and new technology."
-          // grab text 'preview' directly from parent data
         },
       ],
       special: 'reasonsForNTD.js' // give file name of special module
@@ -37,6 +38,7 @@ export const articleData = [
       content: [
         { text: "Despite what activists say, I believe this feeling is somewhat justified. I believe it shows where our society is stuck. It’s not stuck for a simple reason — not just because of apathy, consumer comfort, the rise of clicktivism, or anything like that." }
       ],
+      summary: "Our institutions are the source of many problems, yet we feel that they’re the end state.",
     },
     "2": {
       content: [
@@ -45,19 +47,21 @@ export const articleData = [
           caption: "Our institutions are what's causing our problems"
         },
         { text: "Despite what activists say, I believe this feeling is somewhat justified. I believe it shows where our society is stuck. It’s not stuck for a simple reason — not just because of apathy, consumer comfort, the rise of clicktivism, or anything like that." },
-
-      ]
+      ],
+      summary: "One reason is because they’re rigged. But that’s not it.",
     },
     "3": {
       content: [
         { text: "A second kind of nothing-to-be-done view says that human nature is fixed, and that our current batch of institutions — including markets, democracies, and social networks — represents a kind of final, unimprovable compromise between the different aspects of human nature. On this view, our current institutions make the best possible balance of autonomy against collective responsibility, of equality against opportunity, of consumer affluence against self-expression and public participation, and so on. Broadly, they’re the best way to balance individual incentives with our ideals." },
       ],
+      summary: "The other is that human nature is fixed, and our current state is the most optimised form."
     },
     "4": {
       content: [
         { text: "This view, too, falls apart in the light of history. We find a breathtakingly different story: Human nature, far from being fixed, is read differently from age to age. These different readings give rise to totally new ideas for institutions. And these new readings and new institutions seem to reshape us. Often, what works out in practice would have seemed impossible on the previous views. Furthermore, the traits we are supposedly balancing — autonomy, collective responsibility, equality, etc — are themselves changing. They, also, are expressions of one view of human nature or another." },
 
       ],
+      summary: "However, throughout history, what ‘human nature’ is has continually changed and thus influenced what kinds of institutions we made.",
       links: [
         {
           index: "3-2",
@@ -72,6 +76,7 @@ export const articleData = [
         { text: "Until we have it, we’re stuck recycling old models (unions, co-ops, local currencies, whatever) or, worse, grasping at tech trends (blockchains, wikipedia, the “sharing economy”)." },
         { text: "That’s like trying to invent voting by asking “so, fellas, what can we do with pencils?”" },
       ],
+      summary: "Our present-day institutions can be traced back to visions of particular design cultures and groups of designers.",
       links: [
         {
           index: "7-6",
@@ -90,6 +95,7 @@ export const articleData = [
           footnote: "1"
         },
       ],
+      summary: "We’re stuck because we’re waiting on a new vision of human nature. Old models and new technologies won’t be what pushes us forward.",
       footnotes: [
         // no images in any of the footnotes so can just be text
         { "1": "Economists and technologists (and marxists!) often guess that changes in material conditions must precede changes in ideas and culture. Deirdre McClosky (see below) has convincingly argued that it usually goes in the other direction — new ideas spread through a culture shortly before a large material / economic shift!" }
@@ -106,6 +112,7 @@ export const articleData = [
         { text: "But we can’t imagine how that could happen again today. We can’t even see how our current visions shape our designs, lives, organizations, and our self-conceptions." },
         { text: "I’ll do my best to reveal the visions of human nature which underlie our designs, and how our design cultures keep us locked inside those visions. Once we see the culture we live inside, we’re ready to step outside and see new opportunities." },
       ],
+      summary: "The essay will lay out the visions of human nature that underlie our institutions, which will help us make new ones.",
     }
   },
 ]
