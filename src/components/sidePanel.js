@@ -81,6 +81,7 @@ export default function SidePanel ({ headingPosition, isSidePanel, setSizings, i
           <Links
             sectionData={ sectionData }
             imageSources={ imageSources }
+            panelNavRef={ panelNavRef }
           />
         )
 

@@ -9,7 +9,10 @@ export default function ArticleTemplate ({ headingIndex, sectionIndex, imageSour
   return (
     <div id={ id } className={ classes.module }>
       { indexEl }
-      { bodyEl }
+      <div className={ classes.content }>
+        { bodyEl }
+      </div>
+
     </div>
   )
 }
@@ -92,11 +95,8 @@ export const createArticleEl = (headingIndex, sectionIndex, imageSources) => {
 
     })
 
-    bodyEl = (
-      <div className={ classes.content }>
-        { contentEl }
-      </div>
-    )
+    bodyEl = contentEl
+
 
     id = `${headingIndex}-${sectionIndex}`
 
@@ -107,9 +107,7 @@ export const createArticleEl = (headingIndex, sectionIndex, imageSources) => {
     )
 
     bodyEl = (
-      <div className={ classes.content }>
-        <h2>{ articleData[ headingIndex - 1 ].heading }</h2>
-      </div>
+      <h2>{ articleData[ headingIndex - 1 ].heading }</h2>
     )
 
     id = headingIndex

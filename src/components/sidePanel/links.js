@@ -4,7 +4,7 @@ import { articleData } from "../../data/data"
 import { createArticleEl } from '../articleTemplate'
 
 
-export default function Links ({ sectionData, imageSources }) {
+export default function Links ({ sectionData, imageSources, panelNavRef }) {
 
   const [ curLinkedIndex, setCurLinkedIndex ] = useState(0)
 
@@ -32,19 +32,21 @@ export default function Links ({ sectionData, imageSources }) {
   const indicies = sectionData.links[ curLinkedIndex ].index.split('-')
   let headingIndex = indicies[ 0 ]
   let sectionIndex = indicies[ 1 ]
-  console.log("HEADING SECTION INDEX", indicies)
 
   const { bodyEl } = createArticleEl(headingIndex, sectionIndex, imageSources)
 
   linkedSectionText = (
-    <div>
+    <div className={ classes.linkedTextContainer }>
       { bodyEl }
     </div>
   )
 
 
   return (
-    <div className={ classes.wrapper }>
+    <div style={ {
+      // manually set height so scrollbar for linked text will appear properly
+      height: `${window.innerHeight - panelNavRef.current.offsetHeight}px`
+    } } className={ classes.wrapper }>
 
       <div className={ classes.headingInfoContainer }>
         <div className={ `${classes.module} ${classes.leftModule}` }>
