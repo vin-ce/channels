@@ -8,7 +8,6 @@ import { StaticImage } from 'gatsby-plugin-image'
 
 // contains 'landing' + 'how to navigate this book'
 
-
 export const introData = {
   metadata: (
     <div className={ classes.landingContainer }>
@@ -16,8 +15,7 @@ export const introData = {
       <p style={ { marginBottom: '0' } }>January 10, 2017 <span className={ classes.mutedColor }>— Last Updated</span></p>
       <p style={ { marginTop: '0' } }>~16 minutes <span className={ classes.mutedColor }>— Time to Read</span></p>
     </div>
-  )
-  ,
+  ),
   how: (
 
     <div className={ classes.landingContainer }>

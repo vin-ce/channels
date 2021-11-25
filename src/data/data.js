@@ -71,10 +71,12 @@ export const articleData = [
     },
     "5": {
       content: [
-        { text: "So what blocks the creation of new institutions? It’s not the greed of the powerful; it’s not some physics of balancing incentives:" },
-        { emphasis: "We’re waiting on a new vision of human nature." },
-        { text: "Until we have it, we’re stuck recycling old models (unions, co-ops, local currencies, whatever) or, worse, grasping at tech trends (blockchains, wikipedia, the “sharing economy”)." },
-        { text: "That’s like trying to invent voting by asking “so, fellas, what can we do with pencils?”" },
+        { text: "Indeed, each of our present-day institutions can be traced to a vision of human nature which swept through society. Each new vision led designers to focus on different features of a desirable society, and to recognize different approaches as viable. This made new institutions attractive. The process looked like this:" },
+        {
+          image: "2-5.png",
+          caption: "The different visions of human nature that the designers had lead to the various modern institutions."
+        },
+        { text: "Each of these arrows represents a design culture: a group of designers who thought of people and considered human systems in a particular way. It’s this shared vision which gave birth to institutions." },
       ],
       summary: "Our present-day institutions can be traced back to visions of particular design cultures and groups of designers.",
       links: [
