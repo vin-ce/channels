@@ -1,0 +1,54 @@
+@import "./variables.styl"
+
+.wrapper
+  width 100%
+
+.headingInfoContainer
+  display flex
+  font-family $sans
+  font-size $font-size_200
+  border-bottom 1px solid $black
+
+.module
+  padding 1.2rem
+
+.label
+  font-size $font-size_200
+  font-family $sans
+  color $grey-400
+  text-transform uppercase
+
+.rightModule
+  border-left 1px solid $grey-200
+  width 100%
+
+  p 
+    max-width 36rem
+
+.bottomModule
+  height 100%
+  overflow-y auto
+
+.linkedIndex
+  width max-content
+
+.bottomTextBar
+  display flex
+  justify-content space-between
+
+  .button
+    color $grey-400
+    border 1px solid $grey-400
+    font-size $font-size_200
+    font-family $sans
+    display flex
+    align-items center
+    padding 0.3rem 0.6rem
+    cursor pointer
+    user-select none
+
+    span
+      font-size $font-size_200
+
+      &:first-of-type
+        margin-right 0.6rem

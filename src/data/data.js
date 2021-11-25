@@ -32,7 +32,7 @@ export const articleData = [
   {
     headingIndex: "2",
     heading: "What's The Problem?",
-    sectionCount: 3,
+    sectionCount: 7,
     "1": {
       content: [
         { text: "Despite what activists say, I believe this feeling is somewhat justified. I believe it shows where our society is stuck. It’s not stuck for a simple reason — not just because of apathy, consumer comfort, the rise of clicktivism, or anything like that." }
@@ -48,8 +48,38 @@ export const articleData = [
 
       ]
     },
-    // this should be '5'
     "3": {
+      content: [
+        { text: "A second kind of nothing-to-be-done view says that human nature is fixed, and that our current batch of institutions — including markets, democracies, and social networks — represents a kind of final, unimprovable compromise between the different aspects of human nature. On this view, our current institutions make the best possible balance of autonomy against collective responsibility, of equality against opportunity, of consumer affluence against self-expression and public participation, and so on. Broadly, they’re the best way to balance individual incentives with our ideals." },
+      ],
+    },
+    "4": {
+      content: [
+        { text: "This view, too, falls apart in the light of history. We find a breathtakingly different story: Human nature, far from being fixed, is read differently from age to age. These different readings give rise to totally new ideas for institutions. And these new readings and new institutions seem to reshape us. Often, what works out in practice would have seemed impossible on the previous views. Furthermore, the traits we are supposedly balancing — autonomy, collective responsibility, equality, etc — are themselves changing. They, also, are expressions of one view of human nature or another." },
+
+      ],
+      links: [
+        {
+          index: "3-2",
+          relevance: "All these differing visions and institutions are still very much with us."
+        },
+      ]
+    },
+    "5": {
+      content: [
+        { text: "So what blocks the creation of new institutions? It’s not the greed of the powerful; it’s not some physics of balancing incentives:" },
+        { emphasis: "We’re waiting on a new vision of human nature." },
+        { text: "Until we have it, we’re stuck recycling old models (unions, co-ops, local currencies, whatever) or, worse, grasping at tech trends (blockchains, wikipedia, the “sharing economy”)." },
+        { text: "That’s like trying to invent voting by asking “so, fellas, what can we do with pencils?”" },
+      ],
+      links: [
+        {
+          index: "7-6",
+          relevance: "Each view draws our attention to a particular part of us, which leads us to think about society, and how it ought to be, in certain ways."
+        },
+      ]
+    },
+    "6": {
       content: [
         { text: "So what blocks the creation of new institutions? It’s not the greed of the powerful; it’s not some physics of balancing incentives:" },
         { emphasis: "We’re waiting on a new vision of human nature." },
@@ -60,10 +90,22 @@ export const articleData = [
           footnote: "1"
         },
       ],
-      footnotes: {
+      footnotes: [
         // no images in any of the footnotes so can just be text
-        "1": "Economists and technologists (and marxists!) often guess that changes in material conditions must precede changes in ideas and culture. Deirdre McClosky (see below) has convincingly argued that it usually goes in the other direction—new ideas spread through a culture shortly before a large material / economic shift!"
-      }
+        { "1": "Economists and technologists (and marxists!) often guess that changes in material conditions must precede changes in ideas and culture. Deirdre McClosky (see below) has convincingly argued that it usually goes in the other direction — new ideas spread through a culture shortly before a large material / economic shift!" }
+      ],
+      links: [
+        {
+          index: "9-4",
+          relevance: "What this new vision is won’t be described in full in this essay, but will be hinted at."
+        },
+      ]
+    },
+    "7": {
+      content: [
+        { text: "But we can’t imagine how that could happen again today. We can’t even see how our current visions shape our designs, lives, organizations, and our self-conceptions." },
+        { text: "I’ll do my best to reveal the visions of human nature which underlie our designs, and how our design cultures keep us locked inside those visions. Once we see the culture we live inside, we’re ready to step outside and see new opportunities." },
+      ],
     }
   },
 ]

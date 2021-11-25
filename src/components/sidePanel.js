@@ -2,11 +2,15 @@ import React, { useState, useEffect, useRef } from "react"
 import classes from "../styles/sidePanel.module.styl"
 import { introData } from './intro'
 import { articleData } from "../data/data"
+import Links from './sidePanel/links'
 
-export default function SidePanel ({ headingPosition, isSidePanel, articleRef, containerRef, navRef, setSizings }) {
+import { Link } from 'react-scroll'
+import Comments from './sidePanel/comments'
+
+export default function SidePanel ({ headingPosition, isSidePanel, setSizings, imageSources }) {
 
 
-  console.log('heading pos', headingPosition)
+  // console.log('heading pos', headingPosition)
 
 
   // --------
@@ -15,7 +19,10 @@ export default function SidePanel ({ headingPosition, isSidePanel, articleRef, c
   // https://stackoverflow.com/questions/26233180/resize-a-div-on-border-drag-and-drop-without-adding-extra-markup
 
   const [ isResizing, setIsResizing ] = useState(false)
+
+  const [ navButtons, setNavButtons ] = useState(null)
   const [ selectedInfo, setSelectedInfo ] = useState(null)
+  const [ infoEl, setInfoEl ] = useState(null)
 
   const panelRef = useRef(null)
   const panelNavRef = useRef(null)
@@ -42,101 +49,171 @@ export default function SidePanel ({ headingPosition, isSidePanel, articleRef, c
   // ---------------
   // SETTING CONTENT
 
-  let contentEl
-  let navButtons = []
+  function selectInfo (info, availableInfoSelections, sectionData) {
 
-  if (headingPosition === 'landing') {
+    // push buttons
+    // change info
 
-    contentEl = (
-      <div className={ classes.introContainer }>
-        { introData.metadata }
-      </div>
-    )
+    switch (info) {
+      case 'footnotes': {
 
-  } else if (headingPosition === 'how') {
-    contentEl = (
-      <div className={ classes.introContainer }>
-        { introData.how }
-      </div>
-    )
+        let footnotesEl = []
+        sectionData.footnotes.forEach(footnote => {
+          let key = Object.keys(footnote)
+          footnotesEl.push(
+            <p key={ `footnote-${key[ 0 ]}` }>
+              <span className={ classes.footnoteNum }>{ key[ 0 ] }</span>. { footnote[ key[ 0 ] ] }</p>
+          )
+        })
 
-  } else {
+        setInfoEl(
+          <div className={ classes.infoContainer }>
+            <h2>Footnotes</h2>
+            { footnotesEl }
+          </div>
+        )
 
-    const indicies = headingPosition.split('-')
-    let headingIndex = indicies[ 0 ]
-    let sectionIndex = indicies[ 1 ]
+        break
+      }
+      case 'links': {
 
-    let sectionData = articleData[ headingIndex - 1 ][ sectionIndex ]
+        setInfoEl(
+          <Links
+            sectionData={ sectionData }
+            imageSources={ imageSources }
+          />
+        )
 
-    console.log('section data', headingPosition, sectionData)
-
-
-    if (sectionData) {
-
-      // ensures that there is a button selected
-      let defaultInfo
-      let selectedInfoEl
-
-      // if (sectionData.footnotes) {
-      //   defaultInfo = 'footnotes'
-
-      //   navButtons.push(
-      //     <span key="button-footnote" className={ `material-icons ${classes.navButton}` }>
-      //       add
-      //     </span>
-      //   )
-      // }
-
-      // lots of rejiggling necessary -- set selected info's default if the prev one is not available, set it as prev if available
-
-      // maybe a switch situation to handle each type? e.g links vs footnotes vs special vs comments
-
-      // if (sectionData[ selectedInfo ]) {
-
-      //   // figure out how to structure
-
-      //   contentEl = (
-      //     <div className={ classes.contentContainer }>
-      //       { sectionData[ selectedInfo ] }
-      //     </div>
-      //   )
-      // } else {
-      //   contentEl = (
-      //     <div className={ classes.contentContainer }>
-      //       { sectionData[ defaultInfo ] }
-      //     </div>
-      //   )
-
-      //   setSelectedInfo(defaultInfo)
-      // }
-
+        break
+      }
+      case 'special': {
+        break
+      }
+      case 'comments': {
+        setInfoEl(
+          <div className={ classes.infoContainer }>
+            comments :)
+          </div>
+        )
+        break
+      }
+      default: {
+        console.log("something went wrong in selecting info: ", info)
+      }
 
     }
 
 
+    // sets buttons
+    let tempNavButtons = []
+    availableInfoSelections.forEach(button => {
 
+      let iconID
+      switch (button) {
+        case 'footnotes': {
+          iconID = 'extension'
+          break
+        }
+        case 'links': {
+          iconID = 'insert_link'
+          break
+        }
+        case 'special': {
+          iconID = 'star'
+          break
+        }
+        case 'comments': {
+          iconID = 'chat_bubble'
+          break
+        }
+        default: {
+          console.log("something went wrong in selecting button: ", button)
+        }
+      }
+
+      if (button === info) {
+        tempNavButtons.push(
+          <span key={ `button-${iconID}` } className={ `material-icons-sharp ${classes.selected}` }>
+            { iconID }
+          </span>
+        )
+
+      } else {
+        tempNavButtons.push(
+          <span key={ `button-${iconID}` } className={ `material-icons-sharp ${classes.navButton}` }>
+            { iconID }
+          </span>
+        )
+      }
+
+    })
+
+    setNavButtons(tempNavButtons)
+
+    // return 
 
   }
 
-  // let navButtons = []
+  // sets content and buttons
+  useEffect(() => {
+    // console.log('heading pos change', headingPosition)
+
+    if (headingPosition === 'landing') {
+
+      setInfoEl(
+        <div className={ classes.introContainer }>
+          { introData.metadata }
+        </div>
+      )
+
+    } else if (headingPosition === 'how') {
+      setInfoEl(
+        <div className={ classes.introContainer }>
+          { introData.how }
+        </div>
+      )
+
+    } else {
+
+      const indicies = headingPosition.split('-')
+      let headingIndex = indicies[ 0 ]
+      let sectionIndex = indicies[ 1 ]
+
+      let sectionData = articleData[ headingIndex - 1 ][ sectionIndex ]
+
+      // console.log('section data', headingPosition, sectionData)
+
+      let availableInfoSelections = []
+
+      if (sectionData) {
+
+        if (sectionData.footnotes) {
+          availableInfoSelections.push('footnotes')
+        }
+
+        if (sectionData.links) {
+          availableInfoSelections.push('links')
+        }
+
+        if (sectionData.special) {
+          availableInfoSelections.push('special')
+        }
+
+        availableInfoSelections.push('comments')
+
+        if (availableInfoSelections.includes(selectedInfo)) {
+          selectInfo(selectedInfo, availableInfoSelections, sectionData)
+        } else {
+          selectInfo(availableInfoSelections[ 0 ], availableInfoSelections, sectionData)
+        }
+      }
+
+    }
+
+  }, [ headingPosition ])
 
 
 
-
-  contentEl = (
-    <div className={ classes.wrapper }>
-      <div ref={ panelNavRef } className={ classes.nav }>
-        <span>
-          <strong>{ headingPosition }</strong> <span className={ classes.mutedColor }> | section</span>
-        </span>
-        <span className={ classes.navButtons }>
-          { navButtons }
-
-        </span>
-      </div>
-      { contentEl }
-    </div>
-  )
 
 
 
@@ -155,7 +232,20 @@ export default function SidePanel ({ headingPosition, isSidePanel, articleRef, c
 
       />
 
-      { contentEl }
+      <div className={ classes.wrapper }>
+
+        <div ref={ panelNavRef } className={ classes.nav }>
+          <span>
+            <strong>{ headingPosition }</strong> <span className={ classes.mutedColor }> | section</span>
+          </span>
+          <span className={ classes.navButtons }>
+            { navButtons }
+          </span>
+        </div>
+
+        { infoEl }
+
+      </div>
     </div>
   )
 }

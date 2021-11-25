@@ -1,9 +1,21 @@
 import React from "react"
 import { articleData } from "../data/data"
 import classes from "../styles/articleTemplate.module.styl"
-import { StaticImage } from 'gatsby-plugin-image'
 
 export default function ArticleTemplate ({ headingIndex, sectionIndex, imageSources }) {
+
+  const { indexEl, bodyEl, id } = createArticleEl(headingIndex, sectionIndex, imageSources)
+
+  return (
+    <div id={ id } className={ classes.module }>
+      { indexEl }
+      { bodyEl }
+    </div>
+  )
+}
+
+
+export const createArticleEl = (headingIndex, sectionIndex, imageSources) => {
 
   let indexEl
   let bodyEl
@@ -105,10 +117,10 @@ export default function ArticleTemplate ({ headingIndex, sectionIndex, imageSour
   }
 
 
-  return (
-    <div id={ id } className={ classes.module }>
-      { indexEl }
-      { bodyEl }
-    </div>
-  )
+  return {
+    indexEl,
+    bodyEl,
+    id
+  }
+
 }

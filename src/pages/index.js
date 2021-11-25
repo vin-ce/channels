@@ -27,7 +27,6 @@ export default function Home ({ data }) {
   const articleEl = useRef([])
   const indexArr = useRef([])
 
-
   useEffect(() => {
     data.allFile.edges.forEach(node => {
       imageSources.current.push(node.node.publicURL)
@@ -48,8 +47,6 @@ export default function Home ({ data }) {
       )
 
       indexArr.current.push(`${headingIndex + 1}`)
-
-      console.log("SECITON ", headingData.sectionCount)
 
       for (let sectionIndex = 0; sectionIndex < headingData.sectionCount; sectionIndex++) {
         articleEl.current.push(
@@ -110,7 +107,7 @@ export default function Home ({ data }) {
 
   return (
     <>
-      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></link>
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet"></link>
 
       <div ref={ containerRef } className={ classes.container }>
 
@@ -120,17 +117,17 @@ export default function Home ({ data }) {
             to={ 'landing' }
             smooth
           >
-            <span className="material-icons">
+            <span className="material-icons-sharp">
               arrow_upward
             </span>
           </Link >
 
 
-          <span className={ `material-icons ${classes.compress} ${classes.unselected}` }>
+          <span className={ `material-icons-sharp ${classes.compress} ${classes.unselected}` }>
             compress
           </span>
 
-          <span className={ `material-icons ${classes.selected}` }>
+          <span className={ `material-icons-sharp ${classes.selected}` }>
             expand
           </span>
 
@@ -138,7 +135,7 @@ export default function Home ({ data }) {
             isSidePanel
               ?
               <span
-                className={ `material-icons ${classes.sideOpen}` }
+                className={ `material-icons-sharp ${classes.sideOpen}` }
                 onClick={ () => {
                   setIsSidePanel(false)
                   setSizings(0)
@@ -148,7 +145,7 @@ export default function Home ({ data }) {
               </span>
               :
               <span
-                className={ `material-icons ${classes.sideOpen}` }
+                className={ `material-icons-sharp ${classes.sideOpen}` }
                 onClick={ () => {
                   setIsSidePanel(true)
                   setSizings(480)
@@ -163,11 +160,11 @@ export default function Home ({ data }) {
 
         </div>
 
+        <PositionTracker indexArr={ indexArr.current } setHeadingPosition={ setHeadingPosition } />
 
         <div ref={ articleRef } className={ classes.article }>
           <title>Nothing to Be Done</title>
 
-          <PositionTracker indexArr={ indexArr.current } setHeadingPosition={ setHeadingPosition } />
 
           <Intro />
 
@@ -184,6 +181,7 @@ export default function Home ({ data }) {
             articleRef={ articleRef }
             navRef={ navRef }
             setSizings={ setSizings }
+            imageSources={ imageSources.current }
           /> :
           null
         }

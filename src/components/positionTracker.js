@@ -1,5 +1,6 @@
 import React from "react"
 import { Link } from 'react-scroll'
+import classes from "../styles/index.module.styl"
 
 export default function PositionTracker ({ indexArr, setHeadingPosition }) {
 
@@ -18,16 +19,25 @@ export default function PositionTracker ({ indexArr, setHeadingPosition }) {
         spy={ true }
         offset={ offset }
         smooth
-        activeClass={ 'active' }
+        activeClass={ classes.active }
         onSetActive={ onSetActive }
       // style={ { display: "block" } }
       >
+        {/* { index } */ }
       </Link >
     )
   })
 
   return (
-    <div>
+    <div style={
+      {
+        // position: 'fixed',
+        // zIndex: 100,
+        // top: '6 rem',
+        // display: 'flex',
+        // flexDirection: 'column',
+      }
+    }>
       <Link
         to="landing"
         spy={ true }
@@ -35,6 +45,7 @@ export default function PositionTracker ({ indexArr, setHeadingPosition }) {
         smooth
         onSetActive={ onSetActive }
       >
+        {/* hello */ }
       </Link>
       <Link
         to="how"

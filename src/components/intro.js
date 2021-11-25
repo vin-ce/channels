@@ -6,7 +6,6 @@ import classes from "../styles/intro.module.styl"
 
 import { StaticImage } from 'gatsby-plugin-image'
 
-
 // contains 'landing' + 'how to navigate this book'
 
 
