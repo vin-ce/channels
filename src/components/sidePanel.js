@@ -55,6 +55,29 @@ export default function SidePanel ({ headingPosition, isSidePanel, setSizings, i
     // change info
 
     switch (info) {
+
+      case 'info': {
+
+        if (headingPosition === 'landing') {
+
+          setInfoEl(
+            <div className={ classes.introContainer }>
+              { introData.metadata }
+            </div>
+          )
+
+        } else if (headingPosition === 'how') {
+          setInfoEl(
+            <div className={ classes.introContainer }>
+              { introData.how }
+            </div>
+          )
+
+        }
+
+        break
+      }
+
       case 'footnotes': {
 
         let footnotesEl = []
@@ -114,11 +137,13 @@ export default function SidePanel ({ headingPosition, isSidePanel, setSizings, i
         break
       }
       case 'summary': {
+
         setInfoEl(
           <div className={ classes.infoContainer }>
             <p>{ sectionData.current.summary }</p>
           </div>
         )
+
         break
       }
       default: {
@@ -134,12 +159,16 @@ export default function SidePanel ({ headingPosition, isSidePanel, setSizings, i
 
       let iconID
       switch (button) {
-        case 'footnotes': {
-          iconID = 'extension'
+        case 'info': {
+          iconID = 'info'
           break
         }
         case 'links': {
           iconID = 'insert_link'
+          break
+        }
+        case 'footnotes': {
+          iconID = 'extension'
           break
         }
         case 'special': {
@@ -191,22 +220,9 @@ export default function SidePanel ({ headingPosition, isSidePanel, setSizings, i
   useEffect(() => {
     // console.log('heading pos change', headingPosition)
 
-    if (headingPosition === 'landing') {
+    console.log("heading pos", headingPosition)
 
-      setInfoEl(
-        <div className={ classes.introContainer }>
-          { introData.metadata }
-        </div>
-      )
-
-    } else if (headingPosition === 'how') {
-      setInfoEl(
-        <div className={ classes.introContainer }>
-          { introData.how }
-        </div>
-      )
-
-    } else {
+    if (headingPosition !== 'landing' && headingPosition !== 'how') {
 
       const indicies = headingPosition.split('-')
       let headingIndex = indicies[ 0 ]
@@ -214,33 +230,50 @@ export default function SidePanel ({ headingPosition, isSidePanel, setSizings, i
 
       sectionData.current = articleData[ headingIndex - 1 ][ sectionIndex ]
 
-      availableInfoSelections.current = []
+    } else {
+      sectionData.current = {
+        info: true,
+      }
+    }
 
-      if (sectionData.current) {
 
-        if (sectionData.current.footnotes) {
-          availableInfoSelections.current.push('footnotes')
-        }
+    availableInfoSelections.current = []
 
-        if (sectionData.current.links) {
-          availableInfoSelections.current.push('links')
-        }
+    if (sectionData.current) {
 
-        if (sectionData.current.special) {
-          availableInfoSelections.current.push('special')
-        }
 
-        availableInfoSelections.current.push('comments')
-        availableInfoSelections.current.push('summary')
 
-        if (availableInfoSelections.current.includes(selectedInfo)) {
-          selectInfo(selectedInfo)
-        } else {
-          selectInfo(availableInfoSelections.current[ 0 ])
-        }
+      if (sectionData.current.info) {
+        availableInfoSelections.current.push('info')
       }
 
+      if (sectionData.current.footnotes) {
+        availableInfoSelections.current.push('footnotes')
+      }
+
+      if (sectionData.current.links) {
+        availableInfoSelections.current.push('links')
+      }
+
+      if (sectionData.current.special) {
+        availableInfoSelections.current.push('special')
+      }
+
+
+      if (headingPosition !== 'landing' && headingPosition !== 'how') {
+        availableInfoSelections.current.push('comments')
+        availableInfoSelections.current.push('summary')
+      }
+
+
+      if (availableInfoSelections.current.includes(selectedInfo)) {
+        selectInfo(selectedInfo)
+      } else {
+        selectInfo(availableInfoSelections.current[ 0 ])
+      }
     }
+
+
 
   }, [ headingPosition ])
 

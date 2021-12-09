@@ -21,6 +21,8 @@ export default function Home ({ data }) {
 
   const [ articleEl, setArticleEl ] = useState(null)
 
+  const [ isInitial, setIsInitial ] = useState(true)
+
   // useRef so values don't reset on state change
   // fetch public image sources
   const imageSources = useRef([])
@@ -111,6 +113,13 @@ export default function Home ({ data }) {
     navClasses.push(classes.hidden)
   }
 
+  if (headingPosition === 'how' && isInitial) {
+    setIsSidePanel(true)
+    setSizings(480)
+
+    setIsInitial(false)
+  }
+
   return (
     <>
       <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet"></link>
@@ -175,7 +184,13 @@ export default function Home ({ data }) {
           <title>Nothing to Be Done</title>
 
 
-          <Intro />
+          <Intro
+            isSummary={ isSummary }
+            setIsSummary={ setIsSummary }
+            isSidePanel={ isSidePanel }
+            setIsSidePanel={ setIsSidePanel }
+            setSizings={ setSizings }
+          />
 
           { articleEl ? articleEl : null }
         </div>

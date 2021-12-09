@@ -22,10 +22,19 @@
       flex-direction column
       justify-content center
 
-  .content
+      .blurb
+        font-style italic
+        margin-top 2.4rem
 
-    .blurb
-      font-style italic
+  #how
+    .content
+      width $content-width
+
+  .module
+    p
+      &:first-of-type
+        margin-top 0
+
 
   .coverImage
     max-width 80rem
@@ -35,9 +44,28 @@
   hr
     // margin-top 0
     border-bottom 3px solid $black
+
+  .smallBreak
+    border-bottom 1px solid $grey-200
    
 .mutedColor
   color $grey-400
 
-.landingContainer
-  margin 2.4rem
+.panel
+  padding 2.4rem
+
+
+.button 
+  cursor pointer
+  vertical-align sub
+  margin-left 0.6rem
+
+.unselected
+  color $grey-200
+
+.selected
+  cursor default
+  pointer-events none
+
+.icon
+  vertical-align sub
